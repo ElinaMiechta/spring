@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+
+    <title>Shop Demo</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        .jumbotron jumbotron-fluid {
+            color: #efd8aa;
+        }
+
+        h1 {
+            font-family: 'Montserrat',sans-serif;
+        }
+
+
+        .upper {
+            font-family: 'Montserrat',sans-serif;
+            text-align: center;
+            color: black;
+
+        }
+
+
+
+        .container {
+
+            height: 100px;
+            width: 918px;
+        }
+
+        .display-4 {
+            font-family: 'Montserrat',sans-serif;
+            font-size: 50px;
+        }
+
+        body {
+            background-image: url("https://cdn.mos.cms.futurecdn.net/6xWkh7NfmxVqoT8YMtLGB3.jpg");
+            background-size: 1500px;
+            background-repeat: no-repeat;
+            min-height: 1000%;
+
+        }
+
+
+    </style>
+
+    <!--  <link href="/static/css/register.css" rel="stylesheet"> -->
+</head>
+
+
+<body>
+<section class="upper">
+
+    <div class="container">
+        <h1 class="display-4">New client registration </h1>
+
+    </div>
+</section>
+
+<section class="container-fluid">
+    <section class="row">
+        <section class="col-12 col-sm-6 col-md-3">
+
+            <!--Adding backend -->
+
+            <form th:action="@{/register}" th:method="post" th:object="${client}">
+                <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input th:field ="*{name}" type="text" class="form-control" id="inputName">
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">error-message</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputSurname">Last name</label>
+                    <input th:field="*{surname}" type="text" class="form-control" id="inputSurname">
+                    <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="text-danger">error-message</span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input th:field="*{adress}" type="text" class="form-control" id="inputAddress" placeholder=" Main St 144B">
+                    <span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}" class="text-danger">error-message</span>
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label for="inputCity2">City</label>
+                    <select th:field="*{city}" id="inputCity2" class="form-control">
+                        <option value="choose" selected>Choose</option>
+                        <option value="birminghem">Birminghem</option>
+                        <option value="bluesheer">Bluesheer</option>
+                        <option value="green hills">Green Hills</option>
+                        <option value="golden hills">Golden Hills</option>
+                        <option value="kingstone">Kingstone</option>
+                        <option value="roosevelt town">Roosvelt town</option>
+                        <option value="stone bridge">Stone Bridge</option>
+                        <option value="whitehill">Whitehill</option>
+                        <option value="williamsburg">Williamsburg</option>
+
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="inputPassword">Password</label>
+                    <input th:field="*{password}" type="password" class="form-control" id="inputPassword" placeholder="Abbcc123">
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">error-message</span>
+                </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Remember me
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+
+
+        </section>
+
+
+    </section>
+
+</section>
+
+
+<script src="../static/jquery/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
