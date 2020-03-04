@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="css/xr.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <title>Product - Iphone XR</title>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+    <div class="container">
+        <a class="navbar-brand" href="#">Online Shopping Page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/start">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about" th:action="@{/about}" th:method="get">About</a>
+                    <span class="sr-only">(current)</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextRoot}/listProducts">View products</a>
+                    <span class="sr-only">(current)</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact" th:action="@{/contact}" th:method="get">Contact</a>
+                    <span class="sr-only">(current)</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<main class="container">
+
+    <!-- Left Column / Headphones Image -->
+    <div class="left-column">
+        <img data-image="black"
+             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstore.storeimages.cdn-apple.com%2F4981%2Fas-images.apple.com%2Fis%2Fimage%2FAppleInc%2Faos%2Fpublished%2Fimages%2Fi%2Fph%2Fiphone%2Fxr%2Fiphone-xr-black-select-201809%3Fwid%3D1200%26hei%3D630%26fmt%3Djpeg%26qlt%3D95%26op_usm%3D0.5%2C0.5%26.v%3D1539386311599&f=1&nofb=1"
+             alt="iphone Xr">
+        <img data-image="blue"
+             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fas-images.apple.com%2Fis%2Fimage%2FAppleInc%2Faos%2Fpublished%2Fimages%2Fi%2Fph%2Fiphone%2Fxr%2Fiphone-xr-blue-select-201809%3Fwid%3D1200%26hei%3D630%26fmt%3Djpeg%26qlt%3D95%26op_usm%3D0.5%2C0.5%26.v%3D1551226036356&f=1&nofb=1"
+             alt="">
+        <img data-image="red" class="active"
+             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstore.storeimages.cdn-apple.com%2F4981%2Fas-images.apple.com%2Fis%2Fimage%2FAppleInc%2Faos%2Fpublished%2Fimages%2Fi%2Fph%2Fiphone%2Fxr%2Fiphone-xr-red-select-201809%3Fwid%3D1200%26hei%3D630%26fmt%3Djpeg%26qlt%3D95%26op_usm%3D0.5%2C0.5%26.v%3D1539386310158&f=1&nofb=1"
+             alt="">
+    </div>
+
+
+    <!-- Right Column -->
+    <div class="right-column">
+
+        <!-- Product Description -->
+        <div class="product-description">
+            <span>SMARTPHONES</span>
+
+            <!--
+                        <div th:each="item : ${items}" class="post-preview">
+                            <h2 th:text="${item.getId()}" class="post-title">
+                                ID
+                            </h2>
+                            <p th:text="${'ID ' + item.getId." class="post-meta">  </p>
+
+                        </div>
+            -->
+
+
+            <h1>Iphone Xr 128Gb</h1>
+            <p>Wyświetlacz 6,1 ", 1792 x 828 pikseli, IPS Liquid Retina HD
+                Procesor 6-rdzeniowy Apple A12 Bionic 64-bit
+                System operacyjny iOS 12
+                Pamięć wbudowana 64 GB
+                Aparat Tylny 12 Mpix , Przedni 7 Mpix
+                Komunikacja Wi-Fi, NFC, Lightning, Bluetooth 5.0</p>
+        </div>
+
+        <!-- Product Configuration -->
+        <div class="product-configuration">
+
+            <!-- Product Color  is not working -->
+            <div class="product-color">
+                <span>Color</span>
+
+                <div class="color-choose">
+                    <div>
+                        <input data-image="red" type="radio" id="red" name="color" value="red" checked>
+                        <label for="red"><span></span></label>
+                    </div>
+                    <div>
+                        <input data-image="blue" type="radio" id="blue" name="color" value="blue">
+                        <label for="blue"><span></span></label>
+                    </div>
+                    <div>
+                        <input data-image="black" type="radio" id="black" name="color" value="black">
+                        <label for="black"><span></span></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Memo Configuration -->
+            <div class="memory-config">
+                <span>Memory</span>
+
+                <div class="memory-choose">
+                    <button id="btn1">64Gb</button>
+                    <button id="btn2" class="active">128Gb</button>
+                    <button id="btn3">264Gb</button>
+                </div>
+
+                <a href="https://www.youtube.com/embed/CRIF08a334Y">YouTube presentation</a>
+            </div>
+        </div>
+
+
+        <!-- Product Pricing -->
+        <div class="product-price">
+            <span>148$</span>
+            <a href="#" class="cart-btn">Add to cart</a>
+        </div>
+    </div>
+</main>
+
+
+<footer class="footer1" id="footer-contact">
+    <div class="cf">
+        <p class="footTxt">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+
+<script src="js/item.js"></script>
+
+</body>
+</html>
