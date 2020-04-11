@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/update.css">
+</head>
+<body>
+<form  th:action="@{/upload}" th:method="post" th:object="${item}">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Name</label>
+        <input th:field ="*{name}"type="text" class="form-control" id="formGroupExampleInput" placeholder="Description">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">error-message</span>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input th:field ="*{description}" type="text" class="form-control" id="description" placeholder="Properties">
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger">error-message</span>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input th:field ="*{price}" type="text" class="form-control" id="price" >
+    </div>
+    <div class="form-group">
+        <label for="currency">Currency</label>
+        <input th:field ="*{currency}" type="text" class="form-control" id="currency" placeholder="USD/ZL">
+        <span th:if="${#fields.hasErrors('currency')}" th:errors="*{currency}" class="text-danger">error-message</span>
+    </div>
+    <div class="form-group">
+        <label for="mark">Mark</label>
+        <input th:field ="*{mark}" type="text" class="form-control" id="mark" placeholder="Apple,Huawei,Samsung...">
+
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="mark">Category</label>
+        <input th:field ="*{category}" type="text" class="form-control" id="category" placeholder="Type category number reference">
+
+    </div>
+
+
+    <div class="form-group">
+        <label for="imageUrl">Image URL</label>
+        <input th:field ="*{imageUrl}" type="text" class="form-control" id="imageUrl" placeholder="paste here">
+    </div>
+<!--    <a href="#" id="button" class="btn btn-primary">Preview</a>-->
+       <button  type="submit" class="btn btn-primary" onclick="location.href='/items';">Add item</button> <!-- Не видит куда переходить и не сохранятет хоршо данные в базу-->
+</form>
+
+
+<!--<div class="bg-modal">-->
+
+<!--    <div class="modal-content">-->
+<!--        <div class="close">+</div>-->
+
+
+
+<!--            <div class="card-body">-->
+
+<!--                <p class="form-control" >Nothing  </p>-->
+<!--                    <br>-->
+<!--                <p class="card-price" th:text="${item.getPrice()}">Nothing  </p>-->
+<!--                <br>-->
+<!--                <p class="card-currency" th:text="${item.getCurrency()}">Nothing  </p>-->
+<!--                <br>-->
+<!--                <p class="card-image" th:text="${item.getImageUrl()}">Nothing  </p>-->
+<!--                   &lt;!&ndash; <a href="#">item </a> &ndash;&gt;-->
+
+
+<!--               &lt;!&ndash; <h5>cena</h5> &ndash;&gt;-->
+<!--                <p class="card-text">...</p>-->
+<!--            </div>-->
+
+<!--    </div>-->
+
+
+
+    </div>
+
+
+
+
+<script src="js/update.js"></script>
+</body>
+</html>

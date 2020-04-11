@@ -1,0 +1,117 @@
+p {
+    font-size: 20px;
+    line-height: 50px;
+    color: white;
+}
+
+.text-part {
+    width: 65%;
+    height: 80%;
+    color: white;
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 90px;
+    color: white;
+}
+a {
+    margin: 15px;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover {
+    color: #000;
+}
+
+.banner-area {
+    position: relative;
+    background-image: url(https://images.unsplash.com/photo-1476842634003-7dcca8f832de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.iphone-img {
+    position: relative;
+    margin-top: 0%;
+    justify-content: left;
+    height: 500px;
+}
+
+.text-iphone {
+    font-size: 20px;
+    color: #ffefdb;
+    line-height: 50px;
+    align-items: left;
+    justify-content: left;
+    position: relative;
+    display: flex;
+
+    margin-left: 55%;
+    margin-top: -35%;
+}
+
+
+
+.about-area
+ {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: 200px;
+
+}
+.navbar {
+    position: fixed;
+    margin-top:-1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #d4f6b2;
+    width: 100%;
+    height: 70px;
+    z-index: 1;
+
+
+
+}
+
+.nav {
+    display: flex;
+    justify-content: right;
+    list-style: none;
+    margin-right: 15%;
+    /* letter-spacing: 3px; */
+
+}
+a {
+    margin: 15px;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover {
+    color: #000;
+}
+
+
+.logo {
+    flex: 1 1 auto;
+    margin-left: 10%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 35px;
+}

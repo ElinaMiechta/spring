@@ -1,48 +1,46 @@
 package com.example.rest.controller;
 
-import com.example.rest.controller.clientDto.ClientDto;
-import com.example.rest.model.Client;
+
+import com.example.rest.controller.dto.ClientDto;
+import com.example.rest.controller.dto.ClientLoginData;
+import com.example.rest.controller.dto.OrderDto;
+import com.example.rest.model.Item;
 import com.example.rest.service.ClientService;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import com.example.rest.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@SessionAttributes({"loggedClient"})
 public class ClientController {
     private final ClientService clientService;
 
+    private ItemService itemService;
+
+
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, ItemService itemService ) {
         this.clientService = clientService;
+        this.itemService=itemService;
+
     }
-
-    /*
-    @GetMapping("/clients")
-    public String getAllClients(Model model){
-        List<Client> clients =clientService.getAllClients();
-        model.addAttribute("clients",clients);
-        System.out.println(clients);
-
-        return "hello";
-    }
-
-     */
 
     @GetMapping("/clients")
     public String getAllClients(){
         return String.valueOf(clientService.getAllClients());
     }
 
-    //entrance to registration page
+
     @GetMapping("/register")
     public String register(Model model){
 
@@ -62,5 +60,34 @@ public class ClientController {
         return "login";
 
     }
+
+    @GetMapping("/login")
+    public String login(Model model){
+
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute("client") @Valid ClientLoginData clientLoginData
+    , BindingResult bindingResult, Model model){
+
+        if (bindingResult.hasErrors()){
+            return "login";
+        }
+
+
+        clientService.logInClient(clientLoginData.getSurname(),clientLoginData.getPassword());
+
+        List<Item> list = itemService.getAllItems();
+        model.addAttribute("list",list);
+        model.addAttribute("loggedClient",clientLoginData);
+
+
+
+
+        return "index";
+
+    }
+
 
 }

@@ -9,12 +9,10 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "items")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "item_name")
@@ -28,6 +26,34 @@ public class Item {
 
     @Column(name = "mark")
     private String mark;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "category_id")
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+
+    public Item() {
+    }
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+
+    public Item(String name, int price, String currency, String mark, String imageUrl, String description, String category) {
+        this.name = name;
+        this.price = price;
+        this.currency = currency;
+        this.mark = mark;
+        this.imageUrl = imageUrl;
+        this.category=category;
+        this.description=description;
+    }
 
     public Integer getId() {
         return id;
@@ -47,6 +73,19 @@ public class Item {
 
     public String getMark() {
         return mark;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override

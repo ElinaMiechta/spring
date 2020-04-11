@@ -10,4 +10,8 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client,Integer> {
 
     List<Client> findAll();
+    Client findFirstBySurnameAndPassword(String surname,String password);
+    Client findFirstByPassword(String password);
+    Client getByName(String name);
+
 }

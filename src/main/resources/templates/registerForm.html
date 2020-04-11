@@ -29,8 +29,6 @@
 
         }
 
-
-
         .container {
 
             height: 100px;
@@ -50,10 +48,15 @@
 
         }
 
+        .login {
+            margin-left: 40px;
+            color: black;
+            font-size: smaller;
+        }
+
 
     </style>
 
-    <!--  <link href="/static/css/register.css" rel="stylesheet"> -->
 </head>
 
 
@@ -70,13 +73,18 @@
     <section class="row">
         <section class="col-12 col-sm-6 col-md-3">
 
-            <!--Adding backend -->
+
 
             <form th:action="@{/register}" th:method="post" th:object="${client}">
                 <div class="form-group">
                     <label for="inputName">Name</label>
                     <input th:field ="*{name}" type="text" class="form-control" id="inputName">
                     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">error-message</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">UserName</label>
+                    <input th:field ="*{userName}" type="text" class="form-control" id="inputUserName">
+                    <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger">error-message</span>
                 </div>
 
                 <div class="form-group">
@@ -126,6 +134,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
+                <a class="login" href="/login">Already a client?<u>Log in</u></a>
             </form>
 
 

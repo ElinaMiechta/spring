@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+    <link rel="stylesheet" type="text/css" href="css/item.css" th:href="@{/css/item.css}">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{/css/nav.css}">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+<div class="navbar">
+    <a href="#" class="logo">Tech Shop</a>
+    <ul class="nav">
+        <li><a th:href="@{'/items'}">Home</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a th:href="@{'/about'}">About</a></li>
+        <li><a href="#">Contact</a></li>
+
+    </ul>
+</div>
+
+
+<main class="container">
+
+    <!-- Left Column / Item Image -->
+    <div class="left-column" >
+        <a th:href="@{'/item/' + ${item.name}}"></a>
+
+        <img id="photo" th:attr="src=${item.getImageUrl()},title=${item.getName()},alt=${item.getName()}"/> <br/>
+    </div>
+
+    <div class="right-column">
+
+        <!-- Product Description -->
+        <div class="product-description">
+
+            <h1 class="item-name" th:text="${item.getName()}"></h1>
+            <h1 class="item-name" th:text="${item.getMark()}"></h1>
+            <p class="item-name" th:text="${item.getDescription()}"></p>
+        </div>
+
+
+    <!-- Product Pricing -->
+    <div class="price">
+        <span th:text="${item.getPrice()}"></span>
+        <span th:text="${item.getCurrency()}"></span>
+        <a href="#" class="cart-btn">Add to cart</a>
+    </div>
+    </div>
+
+</main>
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

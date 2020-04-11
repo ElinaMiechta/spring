@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Detail</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/categories.css" th:href="@{/css/categories.css}">
+    <link rel="stylesheet" type="text/css" href="css/nav.css" th:href="@{/css/nav.css}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#navs").load("/basicContent/nav");
+        });
+    </script>
+
+
+
+
+</head>
+<body>
+<div id="navs"></div>
+
+<div class="navbar">
+    <a href="#" class="logo">Tech Shop</a>
+    <ul class="nav">
+        <li><a th:href="@{'/items'}">Home</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a th:href="@{'/about'}">About</a></li>
+        <li><a th:href="@{'/contact'}">Contact</a></li>
+
+    </ul>
+
+</div>
+
+
+
+
+<div class="container">
+    <h2>Products of this category</h2>
+
+    <div class="row" >
+
+        <div class="col=md-3" th:each="item : ${list}">
+            <div class="product-top">
+                <img th:attr="src=${item.getImageUrl()}"
+                     alt="${item.getName()}">
+                <div class="overlay">
+                    <button type="button" class="btn btn-secondary" title="Quick Shop"><i class="fa fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary" title="Add to WishList"><i class="fa fa-heart"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class="fa fa-shopping-cart"></i>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="product-bottom text-center">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <h3 th:text="${item.getName()}"> </h3>
+                <h5 th:text="${item.getPrice()}"></h5>
+                <h5 th:text="${item.getCurrency()}"></h5>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
