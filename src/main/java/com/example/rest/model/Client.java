@@ -1,21 +1,13 @@
 package com.example.rest.model;
 
-import com.example.rest.session.ActiveUserStore;
-import com.example.rest.session.LoggedUser;
-import lombok.AllArgsConstructor;
+
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.Group;
-import org.apache.catalina.Role;
-import org.apache.catalina.User;
-import org.apache.catalina.UserDatabase;
-import org.springframework.context.annotation.Bean;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSessionBindingListener;
-import java.util.Iterator;
-import java.util.List;
+import java.time.LocalDate;
+
 
 @Entity
 @Data
@@ -25,7 +17,6 @@ public class Client  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
 
     @Column(name = "name")
@@ -47,19 +38,36 @@ public class Client  {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "active")
+    private boolean active;
+
+    @Column(name = "login_date")
+    @UpdateTimestamp
+    LocalDate loginDate;
+
+    @Column(name = "role")
+    private String role;
+
+    @Column(name = "token")
+    private String token;
 
 
-
-    public Client(Order order,String name, String surname, String adress, String city,String password, String userName) {
+    public Client(Order order,String name, String surname, String adress, String city,String password,
+                  String email, boolean active, String role, String token) {
         this.order=order;
         this.name=name;
         this.surname=surname;
         this.adress=adress;
         this.city=city;
         this.password=password;
-        this.userName=userName;
+        this.email=email;
+        this.active=active;
+        loginDate=LocalDate.now();
+        this.role=role;
+        this.token=token;
     }
 
     public Client() {
@@ -105,12 +113,48 @@ public class Client  {
         this.city = city;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public LocalDate getLoginDate() {
+        return loginDate;
+    }
+
+    public void setLoginDate(LocalDate loginDate) {
+        this.loginDate = loginDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
@@ -118,9 +162,16 @@ public class Client  {
         return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", order=" + order +
                 ", surname='" + surname + '\'' +
                 ", adress='" + adress + '\'' +
                 ", city='" + city + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", active=" + active +
+                ", loginDate=" + loginDate +
+                ", role='" + role + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

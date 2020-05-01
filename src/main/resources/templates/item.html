@@ -4,28 +4,48 @@
     <meta charset="UTF-8">
     <title>Product Page</title>
     <link rel="stylesheet" type="text/css" href="css/item.css" th:href="@{/css/item.css}">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{/css/nav.css}">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
 
 
 </head>
 <body>
+
+<!-- Navigation-->
+
+
 <div class="navbar">
     <a href="#" class="logo">Tech Shop</a>
     <ul class="nav">
         <li><a th:href="@{'/items'}">Home</a></li>
         <li><a href="#">Cart</a></li>
         <li><a th:href="@{'/about'}">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a th:href="@{'/contact'}">Contact</a></li>
+        <th:block th:if="${user==null}">
+            <li><a th:href="@{'/login'}">Log in</a></li>
+            <li><a th:href="@{'/register'}">Sign up</a></li>
+        </th:block>
+        <li><a th:href="@{'/login'}">Log out</a></li>
 
     </ul>
 </div>
 
 
 <main class="container">
+    <form th:action="@{/login}" method="GET">
+    </form>
+    <br><br/>
+
+    <th:block th:if="${user == null}">
+        <span style="color: #0056b3" ><a href="/login">Not logged in</a></span>
+    </th:block>
+
+    <th:block th:if="${user != null}">
+        <span style="color: #0056b3" ><a href="/login" th:text="${user.getEmail()}"></a></span>
+    </th:block>
+
 
     <!-- Left Column / Item Image -->
     <div class="left-column" >
@@ -49,13 +69,37 @@
     <div class="price">
         <span th:text="${item.getPrice()}"></span>
         <span th:text="${item.getCurrency()}"></span>
-        <a href="#" class="cart-btn">Add to cart</a>
     </div>
+        <div>
+        <a href="#"  onclick="pop()" class="cart-btn"  id="button">Add to cart</a>
+           <div id="box">
+<!--               <span class="ion-checkmark-round"><ion-icon name="checkmark-outline"></ion-icon></span>-->
+               <span><ion-icon name="checkmark-outline"></ion-icon></span>
+
+               <h1 th:text="${item.getName()}"> </h1>
+               <h1 > has been added to Cart</h1>
+               <a  onclick="pop()" class="close">Back</a>
+           </div>
+
+            <script type="text/javascript">
+                var x =0;
+                function pop(){
+                    if (x==0){
+                        document.getElementById("box").style.display ="block";
+                        x=1;
+                    }else {
+                        document.getElementById("box").style.display ="none";
+                        x=0;
+                    }
+                }
+            </script>
+
+    </div>
+
+
     </div>
 
 </main>
-
-
 
 
 

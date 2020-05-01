@@ -23,27 +23,33 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
-<!--    <script>-->
-<!--        $(function () {-->
-<!--            $("#includedContent").load("/basicContent/navigation");-->
-<!--        });-->
-<!--    </script>-->
+
 
 </head>
 
 <body>
 
-<!-- Navigation -->
-<!--<div id="includedContent"></div>-->
 
 <div class="navbar">
     <a href="#" class="logo">Tech Shop</a>
+
+
     <ul class="nav">
         <li><a th:href="@{'/items'}">Home</a></li>
-        <li><a href="#">Cart</a></li>
+        <li><a th:href="@{'/cart'}">Cart</a></li>
         <li><a th:href="@{'/about'}">About</a></li>
         <li><a th:href="@{'/about'}">Contact</a></li>
+
+        <th:block th:if="${loggedUser==null}">
+        <li><a th:href="@{'/login'}">Log in</a></li>
+        <li><a th:href="@{'/register'}">Sign up</a></li>
+        </th:block>
+        <th:block th:if="${loggedUser !=null}">
+            <li><a th:href="@{'/login'}">Log out</a></li>
+        </th:block>
 
     </ul>
 </div>
@@ -51,9 +57,23 @@
 
 <!-- Page Content -->
 <div class="container">
- <a href="/login" class="navbar-brand text-warning" th:if="${loggedClient == null}"><i class="fa fa-user"></i>Not logged in</a>
-    <a class="navbar-brand text-success" th:if="${loggedClient != null}" th:text="${loggedClient.getName()}">Login
-        in</a>
+    <br><br/>
+
+    <th:block th:if="${loggedUser == null}">
+        <span style="color: #0056b3" ><a href="/login">Not logged in</a></span>
+    </th:block>
+
+    <th:block th:if="${loggedUser != null}">
+        <span style="color: #0056b3" ><a href="/login" th:text="${loggedUser.getName()}"></a></span>
+
+        <th:block
+                th:if="${loggedUser.isActive()==false}">
+            <p  ><a th:href="@{'/activation'}" href="/activation" style="color: red"> Account is not active</a></p>
+
+        </th:block>
+
+    </th:block>
+
 
     <div class="row">
 
@@ -61,9 +81,9 @@
 
 
             <div class="list-group">
-                <a th:href="@{'/items/' + ${1}}" class="list-group-item">Category 1</a>
-                <a th:href="@{'/items/' + ${2}}" class="list-group-item">Category 2</a>
-                <a th:href="@{'/items/' + ${3}}" class="list-group-item">Category 3</a>
+                <a th:href="@{'/items/' + ${1}}" class="list-group-item">Smartphones</a>
+                <a th:href="@{'/items/' + ${2}}" class="list-group-item">Laptops</a>
+                <a th:href="@{'/items/' + ${3}}" class="list-group-item">Other products</a>
             </div>
 
         </div>
@@ -162,16 +182,16 @@
     </div>
 
 
-
+</div>
 
     <!-- Bootstrap core JavaScript -->
 
-    <script src="js/jquery.js"></script>
+    <script src="js/jquery.js" th:href="@{/js/jquery.js}" ></script>
 
-    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap.bundle.js" th:href="@{/js/bootstrap.bundle.js}"></script>
 
     <!-- My JS-->
-    <script src="js/simple.js"></script>
+    <script src="js/simple.js" th:href="@{/js/simple.js}"></script>
 
 
 </body>

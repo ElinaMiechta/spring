@@ -1,20 +1,24 @@
 package com.example.rest.controller;
 
 
+import com.example.rest.model.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 
-@Controller
+
+@Controller("/")
 public class PageController {
 
 
 
-    @GetMapping("/start")
-    public String landingPage( ){
+    @GetMapping("/")
+    public String landingPage( @Valid Client client, Model model){
+        model.addAttribute("user",client);
 
         return "index";
 

@@ -1,6 +1,5 @@
 package com.example.rest.controller.dto;
 
-import com.example.rest.model.Category;
 import com.example.rest.model.Order;
 import lombok.Data;
 

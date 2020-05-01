@@ -1,4 +1,4 @@
-package com.example.rest;
+package com.example.rest.config;
 
 import com.example.rest.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 // SQL dla logowania użytkownika po adresie email i haśle
-                .usersByUsernameQuery("SELECT c.surname, c.password FROM clients c WHERE c.surname = ?")
+                .usersByUsernameQuery("SELECT c.email, c.password FROM clients c WHERE c.email = ?")
                 // SQL dla przypisania uprawnień dla zalogowanego użytkownika
-                .authoritiesByUsernameQuery("SELECT c.surname, c.password FROM clients c  WHERE c.surname = ?")
+                .authoritiesByUsernameQuery("SELECT c.email, c.password FROM clients c  WHERE c.email = ?")
                 // wynik logowania
                 .dataSource(dataSource)
                 // szyfrowanie hasła
-                .passwordEncoder(passwordEncoder())
-                .and()
-                .inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("Admin123"))
-                .roles("ADMIN");
+                .passwordEncoder(passwordEncoder());
 
 
     }
@@ -56,8 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest()
                 .hasRole("ADMIN")
-
-
 
                 .and()
                 .formLogin()

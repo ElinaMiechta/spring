@@ -13,19 +13,21 @@ public class ClientDto {
     private Order order;
 
     @NotBlank(message = "Insert your name")
-    @Pattern(regexp = "([A-Za-z]).{3,49}", message = "Digits are not allowed, length from 3 to 49 letters")
+    @Pattern(regexp = "([A-Za-z]).{2,49}", message = "Digits are not allowed, length from 3 to 49 letters")
     private String name;
 
-    @NotBlank(message = "Insert your user name")
-    @Pattern(regexp = "([A-Za-z0-9]).{3,49}", message = "Digits are not allowed, length from 3 to 49 letters")
-    private String userName;
+
 
     @NotBlank(message = "Insert your lastname")
     @Pattern(regexp = "([A-Za-z]).{3,49}", message = "Digits are not allowed, length from 3 to 49 letters")
     private String surname;
 
+    @NotBlank(message = " email is required!")
+    @Size(min = 5, message = "email is too short")
+    @Pattern(regexp = "^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$")
+    private String email;
+
     @NotBlank(message = "Insert your adress /str/nr/postal code")
-    @Pattern(regexp = "^[#.0-9a-zA-Z\\s,-]+$",message = "Incorrect adress type")
     private String adress;
 
     @NotBlank(message = "Insert your city")
@@ -37,8 +39,8 @@ public class ClientDto {
     private String password;
 
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
     public Order getOrder() {

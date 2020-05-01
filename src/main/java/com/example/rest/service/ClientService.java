@@ -6,17 +6,24 @@ import com.example.rest.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 public class ClientService {
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
+    private MailService mailService;
+
 
     @Autowired
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, MailService mailService) {
         this.clientRepository = clientRepository;
+        this.mailService = mailService;
     }
 
     public List<Client> getAllClients() {
@@ -25,59 +32,60 @@ public class ClientService {
 
     public void saveClientToDB(ClientDto clientDto) {
         String encodedPassword = new BCryptPasswordEncoder().encode(clientDto.getPassword());
+        String token = UUID.randomUUID().toString();
 
         Client client = new Client(clientDto.getOrder(), clientDto.getName(),
                 clientDto.getSurname(),
                 clientDto.getAdress(),
                 clientDto.getCity(),
-                encodedPassword,clientDto.getUserName());
-
-        System.out.println(client);
+                encodedPassword, clientDto.getEmail(), false, "USER", token);
         clientRepository.save(client);
+        sendToken(client);
 
     }
 
 
-
-
-    Client findFirstBySurnameAndPassword(String login, String password) {
-        int id = 0;
-
-
-            List<Client> list = clientRepository.findAll();
-            list.stream().filter(c -> c.getSurname().equals(login)
-                    && c.getPassword().equals(password)).findFirst();
-
-
-        return list.get(0);
-    }
-
-
-
-    public void logInClient(String login, String password) {
-        clientRepository.findFirstBySurnameAndPassword(login
-                , password);
+    public void logInClient(String email) {
+        clientRepository.findClientByEmail(email);
 
     }
 
-
-
-    public Integer findIdByPassword(String password){
-
-        List<Client> list = clientRepository.findAll();
-        list.stream().filter(client -> client.getPassword().equals(password))
-                .map(Client::getId).collect(Collectors.toList());
-
-        return list.get(0).getId();
+    private void sendToken(@Valid Client client) {
+        String token = client.getToken();
+        String url = "http://localhost:8080" + "/" + token;
+        mailService.sentMail(client.getEmail(), "Account activation", url, true);
 
     }
 
-    public Client getByName(String name){
-        return clientRepository.getByName(name);
+    @Transactional
+    public void activateAccount(String token) {
+        clientRepository.activateAccount(token);
     }
 
 
+    public Client findClientbyToken(String token) {
+        return clientRepository.findClientByToken(token);
+    }
 
+    public Client findClientbyEmail(String email) {
+        return clientRepository.findClientByEmail(email);
+    }
 
+    @Transactional
+    public void deactivateClient(LocalDate loginDate) {
+        clientRepository.deactivateAccount(loginDate);
+    }
 
+    @Transactional
+    public void resendTokenToActivateAccount(String token, String email) {
+        clientRepository.saveNewToken(token, email);
+        Client client = findClientbyToken(token);
+        sendToken(client);
+    }
+
+    @Transactional
+    public void updateLoginDate(String email){
+        Client client = findClientbyEmail(email);
+        clientRepository.updateLoginDate(email);
+    }
 }
